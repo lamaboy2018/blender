@@ -591,6 +591,15 @@ static DRWShadingGroup *CLAY_object_shgrp_get(Object *ob, CLAY_StorageList *stl,
 	                       ssao_distance, ssao_factor_cavity, ssao_factor_edge,
 	                       ssao_attenuation, matcap_icon);
 
+	{
+		/* Temporary reference code for clay engine */
+		CollectionEngineSettings *ces_mode_ob = BKE_object_collection_engine_get(ob, COLLECTION_MODE_OBJECT, "");
+		printf("%s: %s: ObjectMode: %d\n", __func__, ob->id.name + 2, BKE_collection_engine_property_value_get_int(ces_mode_ob, "foo"));
+
+		CollectionEngineSettings *ces_mode_edit = BKE_object_collection_engine_get(ob, COLLECTION_MODE_EDIT, "");
+		printf("%s: %s: EditMode: %4.2f\n", __func__, ob->id.name + 2, BKE_collection_engine_property_value_get_float(ces_mode_edit, "bar"));
+	}
+
 	return stl->storage->shgrps[index];
 }
 
